@@ -1,170 +1,135 @@
 # -*- coding: utf-8 -*-
 
-import LINETCR
-from LINETCR.lib.curve.ttypes import *
+import pyximport;pyximport.install()
+import BFFFFf
+from BFFFFf.lib.curve.ttypes import *
 from datetime import datetime
-from bs4 import BeautifulSoup
-import time, random, sys, re, os, json, subprocess, threading, string, codecs, requests, ctypes, urllib, urllib2, wikipedia,tempfile,glob,shutil,unicodedata,goslate
+import time,random,sys,json,codecs,threading,glob
 
+cl = BFFFFf.LINE()
 
-cl = LINETCR.LINE()
-cl.login(qr=True)
-#cl.login(token="EnIPg4tThACAoRXylxd9.szDkFhIVNZQp7d4DX8zgQq.o3cWl/9BNrV1n+Vvd6B0N1IVgTx8AKGqr26BnpMJIOo=")
+cl.login(token="EmQfSnWgxtXBqP9hSyT0.H1Lk+IJvLIQ3rMMmhznPGa.qiFGNAInS2oe7aM02UK+uiRf1j4kixs8N78Mmz9UMJY=")
 cl.loginResult()
-#vidia
-#kt = LINETCR.LINE()
-#kt.login(token="EmcHKy7OJP3IChWh89o7.w2t8Z9Xjv6gelJSDmXaO9W.kOJqwINfM0b5vU/Ocd3Op8uggQ8fmC9YIrcc8RJotjI=")
-#kt.loginResult()
-#rosetta
-#ks = LINETCR.LINE()
-#ks.login(token="EmxkNlZXeYujhwzsihX4.sGaMXmjviJMROq5S4Cc39a.y4PKP22mOaCCA1aqFRLgrFI3zzzOhfWREzUhV0eK8iw=")
-#ks.loginResult()
-#sirvelmist
-#ki = LINETCR.LINE()
-#ki.login(token="EmLT4QmZDTOhuT3YWa8e.6xqhRUmgRAnJkNHgUf9pRG.cYeoV8xeMhVTFMGG+QWH1qaVB6vmO0kcF5z0yVr4dGE=")
+
+#ki = BFFFFf.LINE()
+#ki.login(token="EmzHHwxBv1qrRfwsbAhd.cwB+CDbraDzJDa9X1PRpxq.hE9zaXPXVTyFK6YvfCp93ZI8xltR00RG4akcx5b9cmU=")
 #ki.loginResult()
-#fawn
-#kk = LINETCR.LINE()
-#kk.login(token="Em12iy3uGiMtThUdUeF0.1fr9c+yGB9KiIPMXgRT+aa.X7rZOQsgp+nDs2Xx5tJJ9Z6HGyfI+Mo347UPGpoCsx0=")
+
+#kk = BFFFFf.LINE()
+#kk.login(token="EmK7C1N4fMiFD6Cwfa7f.7I8ZPERZDnDxt4+rBdMTlW.+GGqK0py/1CW7+CBTRl8urJLHFmCm8A6wp9tRxeZraA=")
 #kk.loginResult()
-#iridessa
-#kc = LINETCR.LINE()
-#kc.login(token="EmcRs7TR2ZTODz50pVq9.uxyX0wPToHk+Po1M6IzIIq.+2sr01OPoP41ner8K4FDgth0WhL9ye+o+wKhrHV/bHw=")
+
+#kc = BFFFFf.LINE()
+#kc.login(token="Em5etGvJ323WYeezDxM3.x29XInczKFNk/xybxHWLaW.RWaELafJ21QtapiGN/ubhu+XS8Sx6JQPMwt7FSSKklY=")
 #kc.loginResult()
 
-#kicker ghost
-#kl = LINETCR.LINE()
-#kl.login(token="")
-#kl.loginResult()
+#kd = BFFFFf.LINE()
+#kd.login(token="EmMfHzNaHDHiKX7nEOva.EZrmTlyikc+xw1PbTxMkMG.Nq7fEGYbgchLlVhSPsNU7d39UpXBDgKBjBG6e1uCy6I=")
+#kd.loginResult()
 
-print "Bffff"
+
+
+
+print "login success"
 reload(sys)
 sys.setdefaultencoding('utf-8')
-helpMessage= """\n
-=======================
-=======================\n
+
+helpMessage ="""
+
+    [คำสั่งทั่วไป.....]
+
+✈[เช็คริส = ดูรายชื่อที่ถูกแบน]
+✈[เช็คแบน = เช็ค Mid คนที่ถูกแบน]
+✈[ยกเชิญ1 = ยกค้างเชิญที่ละ1คน]
+✈[ยกเชิญ = ยกเลิกค้างเชิญทั้งหมด]
+✈[Test = ทดสอบบอทว่าใช้ได้ไหม]
+✈[speed= เช็คความเร็วบอท]
+✈[คท = Mid ของบอท]
+✈[กลุ่ม = ข้อมูลกลุ่ม]
+✈[ปิดลิ้ง = ปิดลิ้งกลุ่ม]
+✈[set = ตรวจดูคำสั่ง]
+✈[Bf@=แท๊กคนทั้งกลุ่ม]
+✈[ใครแอบ=ตั้งเวลาปัญจุบัน]
+✈[ออกมา=ดูรายชื่อคนเข้ามาอ่าน]
+
+
+[[[[[คำสั่ง Admin**--]]]]]
+
+
+✈[Bf@=แท๊กคนทั้งกลุ่ม]
+✈[ใครแอบ=ตั้งเวลาปัญจุบัน]
+✈[ออกมา=ดูรายชื่อคนเข้ามาอ่าน]
+✈[เช็คริส = ดูรายชื่อที่ถูกแบน]
+✈[เช็คแบน = เช็ค Mid คนที่ถูกแบน]
+✈[ยกเชิญ1 = ยกค้างเชิญที่ละ1คน]
+✈[ยกเชิญ = ยกเลิกค้างเชิญทั้งหมด]
+✈[Test = ทดสอบบอทว่าใช้ได้ไหม]
+✈[speed= เช็คความเร็วบอท]
+✈[คท = Mid ของบอท]
+✈[กลุ่ม = ข้อมูลกลุ่ม]
+✈[เปิดลิ้ง = เปิดลิ้งกลุ่ม]
+✈[ปิดลิ้ง = ปิดลิ้งกลุ่ม]
+✈[เปลี่ยนชื่อกลุ่ม :ตามด้วยื่อกลุ่ม]
+✈[แบน @ =ใส่แบล็คริส]
+✈[แก้แบน @ = แก้คนติดแบน]
+✈[ลิ้งกลุ่ม = ขอลิ้งกลุ่ม]
+✈[เตะ = ลบคนที่ติดแบนในกลุ่ม]
+✈[เตะทั้งหมด = ลบสมาชิกทั้งหมด]
+✈[เตะ:mid = เตะคนนั้นออก]
+
+[ฺBY ==  β•`BF.บั้ม•`]
 
 """
-KAC=[cl]#,ki,kk,kc,ks,kt]
+
+
+KAC = [cl]
+
 mid = cl.getProfile().mid
 #Amid = ki.getProfile().mid
 #Bmid = kk.getProfile().mid
 #Cmid = kc.getProfile().mid
-#Dmid = ks.getProfile().mid
-#Emid = kt.getProfile().mid
-#Fmid = kl.getProfile().mid
+#Dmid = kd.getProfile().mid
 
-protectname = []
-protecturl = []
-protection = []
-autocancel = {}
-autoinvite = []
-autoleaveroom = []
-targets = []
-Bots=[mid]#,Amid,Bmid,Cmid,Dmid,Emid]
-admin = ["u832d6b22ecdb23a673a2ae6a8784f714",""]
-staff = ["u49974a7c78af9f3a8fec3e1dc7c646a9",""]
+Bots=[mid,"u49974a7c78af9f3a8fec3e1dc7c646a9"]
+
+admin=[cl,"u49974a7c78af9f3a8fec3e1dc7c646a9"]
+staff = [""]
+
 wait = {
-    'contact':False,
-    'autoJoin':True,
-    'autoCancel':{"on":True, "members":1},
-    'leaveRoom':False,
+    'contact':True,
+    'autoJoin':False,
+    'autoCancel':{"on":True,"members":1},
+    'leaveRoom':True,
     'timeline':True,
     'autoAdd':False,
-    'message':"Thanks for add Me",
+    'message':True,
     "lang":"JP",
-    "comment":"AutoLike by ayana",
-    "welmsg":"welcome to group",
+    "comment":"",
     "commentOn":True,
     "commentBlack":{},
     "wblack":False,
     "dblack":False,
-    "clock":False,
-    "status":False,
-    "likeOn":False,
-    "pname":False,
+    "clock":True,
+    "cName":"β•`BF.บั้ม•` ",
     "blacklist":{},
-    "whitelist":{},
     "wblacklist":False,
     "dblacklist":False,
-    "qr":False,
-    "welcomemsg":False,
-    "Backup":False,
-    "protectionOn":False,
-    "winvite":False,
-    "pnharfbot":{},
-    "pname":{},
-    "pro_name":{},
-    }
+    "atjointicket":False,
+    "Protectgr":False,
+    "Protectjoin":False,
+    "Protectcancl":False,
+    "protectionOn":True
+}
+
 wait2 = {
     'readPoint':{},
     'readMember':{},
     'setTime':{},
     'ROM':{}
     }
-
-mimic = {
-    "copy":False,
-    "copy2":False,
-    "status":False,
-    "target":{}
-    }
-
-res = {
-    'num':{},
-    'us':{},
-    'au':{},
-}
-
-
 setTime = {}
 setTime = wait2['setTime']
 
-contact = cl.getProfile()
-backup = cl.getProfile()
-backup.displayName = contact.displayName
-backup.statusMessage = contact.statusMessage
-backup.pictureStatus = contact.pictureStatus
-
-
-
-def upload_tempimage(client):
-     '''
-         Upload a picture of a kitten. We don't ship one, so get creative!
-     '''
-     config = {
-         'album': album,
-         'name':  'bot auto upload',
-         'title': 'bot auto upload',
-         'description': 'bot auto upload'
-     }
-
-     print("Uploading image... ")
-     image = client.upload_from_path(image_path, config=config, anon=False)
-     print("Done")
-     print()
-
-def restart_program():
-    python = sys.executable
-    os.execl(python, python, * sys.argv)
-
-def yt(query):
-    with requests.session() as s:
-         isi = []
-         if query == "":
-             query = "S1B tanysyz"   
-         s.headers['user-agent'] = 'Mozilla/5.0'
-         url    = 'http://www.youtube.com/results'
-         params = {'search_query': query}
-         r    = s.get(url, params=params)
-         soup = BeautifulSoup(r.content, 'html5lib')
-         for a in soup.select('.yt-lockup-title > a[title]'):
-            if '&list=' not in a['href']:
-                if 'watch?v' in a['href']:
-                    b = a['href'].replace('watch?v=', '')
-                    isi += ['youtu.be' + b]
-         return isi
-
 def sendMessage(to, text, contentMetadata={}, contentType=0):
     mes = Message()
     mes.to, mes.from_ = to, profile.mid
@@ -174,147 +139,30 @@ def sendMessage(to, text, contentMetadata={}, contentType=0):
         messageReq[to] = -1
     messageReq[to] += 1
 
-def mention(to, nama):
-    aa = ""
-    bb = ""
-    strt = int(14)
-    akh = int(14)
-    nm = nama
-    for mm in nm:
-      akh = akh + 2
-      aa += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(mm)+"},"""
-      strt = strt + 6
-      akh = akh + 4
-      bb += "\xe2\x95\xa0 @x \n"
-    aa = (aa[:int(len(aa)-1)])
-    msg = Message()
-    msg.to = to
-    msg.text = "\xe2\x95\x94\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\n"+bb+"\xe2\x95\x9a\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90"
-    msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+aa+']}','EMTVER':'4'}
-    print "[Command] Tag All"
-    try:
-       cl.sendMessage(msg)
-    except Exception as error:
-       print error
-def sendMessage(self, messageObject):
-        return self.Talk.client.sendMessage(0,messageObject)
-
-def sendText(self, Tomid, text):
-        msg = Message()
-        msg.to = Tomid
-        msg.text = text
-
-        return self.Talk.client.sendMessage(0, msg)
-def sendImage(self, to_, path):
-        M = Message(to=to_,contentType = 1)
-        M.contentMetadata = None
-        M.contentPreview = None
-        M_id = self._client.sendMessage(M).id
-        files = {
-            'file': open(path, 'rb'),
-        }
-        params = {
-            'name': 'media',
-            'oid': M_id,
-            'size': len(open(path, 'rb').read()),
-            'type': 'image',
-            'ver': '1.0',
-        }
-        data = {
-            'params': json.dumps(params)
-        }
-        r = self._client.post_content('https://os.line.naver.jp/talk/m/upload.nhn', data=data, files=files)
-        if r.status_code != 201:
-            raise Exception('Upload image failure.')
-        #r.content
-        return True
-
-def sendImageWithURL(self, to_, url):
-      path = '%s/pythonLine-%i.data' % (tempfile.gettempdir(), randint(0, 9))
-      r = requests.get(url, stream=True)
-      if r.status_code == 200:
-         with open(path, 'w') as f:
-            shutil.copyfileobj(r.raw, f)
-      else:
-         raise Exception('Download image failure.')
-      try:
-         self.sendImage(to_, path)
-      except Exception as e:
-         raise e
- 
-def post_content(self, urls, data=None, files=None):
-        return self._session.post(urls, headers=self._headers, data=data, files=files)
-def sendMessage(to, text, contentMetadata={}, contentType=0):
-    mes = Message()
-    mes.to, mes.from_ = to, profile.mid
-    mes.text = text
-    mes.contentType, mes.contentMetadata = contentType, contentMetadata
-    if to not in messageReq:
-        messageReq[to] = -1
-    messageReq[to] += 1
-
-def sendMessage(to, text, contentMetadata={}, contentType=0):
-    mes = Message()
-    mes.to, mes.from_ = to, profile.mid
-    mes.text = text
-    mes.contentType, mes.contentMetadata = contentType, contentMetadata
-    if to not in messageReq:
-        messageReq[to] = -1
-    messageReq[to] += 1
 def NOTIFIED_READ_MESSAGE(op):
-    print op
     try:
         if op.param1 in wait2['readPoint']:
             Name = cl.getContact(op.param2).displayName
             if Name in wait2['readMember'][op.param1]:
                 pass
             else:
-                wait2['readMember'][op.param1] += "\n・" + Name + datetime.now().strftime(' [%d - %H:%M:%S]')
-                wait2['ROM'][op.param1][op.param2] = "・" + Name + " ツ"
+                wait2['readMember'][op.param1] += "\n・" + Name
+                wait2['ROM'][op.param1][op.param2] = "・" + Name
         else:
             pass
     except:
         pass
-def RECEIVE_MESSAGE(op):
-    msg = op.message
-    try:
-        if msg.contentType == 0:
-            try:
-                if msg.to in wait2['readPoint']:
-                    if msg.from_ in wait2["ROM"][msg.to]:
-                        del wait2["ROM"][msg.to][msg.from_]
-                else:
-                    pass
-            except:
-                pass
-        else:
-            pass
-          
-    except KeyboardInterrupt:
-				sys.exit(0)
-    except Exception as error:
-        print error
-        print ("\n\nRECEIVE_MESSAGE\n\n")
-        return
 
 
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
+def cms(string, commands): #/XXX, >XXX, ;XXX, ^XXX, %XXX, $XXX...
+    tex = ["+","@","/",">",";","^","%","$","＾","サテラ:","サテラ:","サテラ：","サテラ："]
+    for texX in tex:
+        for command in commands:
+            if string ==command:
+                return True
+    return False
 
-
-def bot2(op):
+def bot(op):
     try:
         if op.type == 0:
             return
@@ -372,18 +220,15 @@ def bot2(op):
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        if op.type == 17:
-            group = cl.leaveGroup(op.param1)
-            cb = Message()
-            cb.to = op.param1
-            cb.text = cl.getContact(op.param3).displayName + " \n\n[ขอไห้คุณโชคดี..]\n\n " + group.name
-            cl.sendMessage(cb)
+        if op.type == 15:
+            random.choice(cl).sendText(op.param1, "ขอไห้คุณโชคดี")
+            print op.param2 + "has left the group"
 
         if op.type == 17:
             group = cl.getGroup(op.param1)
             cb = Message()
             cb.to = op.param1
-            cb.text = cl.getContact(op.param2).displayName + " \n\n[ยินดีต้อนรับเข้ากลุ่ม]\n\n " + group.name
+            cb.text = cl.getContact(op.param2).displayName + " \n\n[✈ยินดีต้อนรับเข้ากลุ่ม✈]\n\n " + group.name
             cl.sendMessage(cb)
 
 
@@ -1274,7 +1119,7 @@ def bot2(op):
                         if msg.toType == 2:
                             if msg.from_ in admin:
                                 print "[Command]Cleanse executing"
-                                _name = msg.text.replace("Bfลบห้อง", "")
+                                _name = msg.text.replace("Cleanse", "")
                                 gs = ki.getGroup(msg.to)
                                 gs = kk.getGroup(msg.to)
                                 gs = kc.getGroup(msg.to)
@@ -1587,10 +1432,14 @@ def bot2(op):
                         kg.sendText(msg.to, "name " + string + " done..❗")
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-            elif msg.text in ["Speed", "Sp", "speed"]:
+            elif "Speed" in msg.text:
                 start = time.time()
                 cl.sendText(msg.to, "ตรวจความเร็วบอท...")
+                elapsed_time = time.time() - start
+                cl.sendText(msg.to, "%s second" % (elapsed_time))
+            elif "Sp" in msg.text:
+                start = time.time()
+                cl.sendText(msg.to, "ตรวจความเร็วบอท...\n")
                 elapsed_time = time.time() - start
                 cl.sendText(msg.to, "%s second" % (elapsed_time))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1670,7 +1519,7 @@ def bot2(op):
                     if _nametarget == g.displayName:
                         targets.append(g.mid)
                 if targets == []:
-                    cl.sendText(msg.to, "Contact not found")
+                    ki.sendText(msg.to, "Contact not found")
                 else:
                     for target in targets:
                         try:
@@ -1692,7 +1541,7 @@ def bot2(op):
                     if _nametarget == g.displayName:
                         targets.append(g.mid)
                 if targets == []:
-                    cl.sendText(msg.to,"Contact not found")
+                    ki.sendText(msg.to,"Contact not found")
                 else:
                     for target in targets:
                         try:
@@ -1705,8 +1554,9 @@ def bot2(op):
                 print "[Command]dp executed"
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-            elif msg.text in ["Test", "เทส"]:
+            elif "Test" in msg.text:
+                cl.sendText(msg.to, "บอท ใช้ได้ปกติ 😁")
+            elif "เทส" in msg.text:
                 cl.sendText(msg.to, "บอท ใช้ได้ปกติ 😁")
 # -----------------------------------------------
 
@@ -1723,64 +1573,8 @@ def bot2(op):
                 else:
                     cl.sendText(msg.to, "拒绝了全部的邀请。")
 
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-            elif msg.text.lower() == 'bot restart':
-                    print "[Command]Like executed"
-                    try:
-                        cl.sendText(msg.to, "ทำการรีโปรแกรมเรียบร้อย")
-                        restart_program()
-                    except:
-                        cl.sendText(msg.to, "Please wait")
-                        restart_program()
-                        pass
-            elif msg.text.lower() == 'รีเซ็ทบอท':
-                print "[Command]Like executed"
-                try:
-                    cl.sendText(msg.to, "ทำการรีโปรแกรมเรียบร้อย")
-                    restart_program()
-                except:
-                    cl.sendText(msg.to, "Please wait")
-                    restart_program()
-                    pass
-            elif msg.text.lower() == 'ifconfig':
-                    botKernel = subprocess.Popen(["ifconfig"], stdout=subprocess.PIPE).communicate()[0]
-                    cl.sendText(msg.to, botKernel + "\n\n===SERVER INFO NetStat===")
-            elif msg.text.lower() == 'system':
-                    botKernel = subprocess.Popen(["df", "-h"], stdout=subprocess.PIPE).communicate()[0]
-                    cl.sendText(msg.to, botKernel + "\n\n===SERVER INFO SYSTEM===")
-            elif msg.text.lower() == 'kernel':
-                    botKernel = subprocess.Popen(["uname", "-srvmpio"], stdout=subprocess.PIPE).communicate()[0]
-                    cl.sendText(msg.to, botKernel + "\n\n===SERVER INFO KERNEL===")
-            elif msg.text.lower() == 'cpu':
-                    botKernel = subprocess.Popen(["cat", "/proc/cpuinfo"], stdout=subprocess.PIPE).communicate()[0]
-                    cl.sendText(msg.to, botKernel + "\n\n===SERVER INFO CPU===")
 
-            elif "youtube " in msg.text.lower():
-                        query = msg.text.split(" ")
-                        try:
-                            if len(query) == 3:
-                                isi = yt(query[2])
-                                hasil = isi[int(query[1]) - 1]
-                                cl.sendText(msg.to, hasil)
-                            else:
-                                isi = yt(query[1])
-                                cl.sendText(msg.to, isi[0])
-                        except Exception as e:
-                            cl.sendText(msg.to, str(e))
-            elif 'Vidio ' in msg.text:
-                    try:
-                        textToSearch = (msg.text).replace('Vidio ', "").strip()
-                        query = urllib.quote(textToSearch)
-                        url = "https://www.youtube.com/results?search_query=" + query
-                        response = urllib2.urlopen(url)
-                        html = response.read()
-                        soup = BeautifulSoup(html, "html.parser")
-                        results = soup.find(attrs={'class': 'yt-uix-tile-link'})
-                        ght = ('https://www.youtube.com' + results['href'])
-                        cl.sendVideoWithURL(msg.to, ght)
-                    except:
-                        cl.sendText(msg.to, "Could not find it")
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2261,7 +2055,6 @@ def bot2(op):
 
     except Exception as error:
         print error
-
 #------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------
@@ -2269,16 +2062,7 @@ def bot2(op):
 #------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-
-
-def bot3(op):
+def bot2(op):
     try:
         if op.type == 0:
             return
@@ -2970,97 +2754,36 @@ def bot3(op):
 
             elif msg.text in ["Test", "เทส"]:
                 cl.sendText(msg.to, "บอท ใช้ได้ปกติ 😁")
+
 #-----------------------------------------------
 
             elif "Hi bf" in msg.text:
                 cl.sendText(msg.to, "Hi 😁")
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            elif msg.text in ["Speed", "Sp", "speed"]:
+            elif msg.text in ["Speed","Sp","speed"]:
                 start = time.time()
                 cl.sendText(msg.to, "ตรวจความเร็วบอท...")
                 elapsed_time = time.time() - start
                 cl.sendText(msg.to, "%s second" % (elapsed_time))
 
-
-            elif msg.text in ["Cancelinvite1", "ยกเชิญ1"]:
-                if msg.toType == 2:
-                    group = cl.getGroup(msg.to)
-                    gMembMids = [contact.mid for contact in group.invitee]
-                    for _mid in gMembMids:
-                        cl.cancelGroupInvitation(msg.to, [_mid])
-                    cl.sendText(msg.to, "ยกเชิญเสำเร็จ..")
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            elif msg.text in ["Bf@", "Tagall"]:
+            elif "Bf@" in msg.text:
                 group = cl.getGroup(msg.to)
-                nama = [contact.mid for contact in group.members]
-
-                cb = ""
-                cb2 = ""
-                strt = int(0)
-                akh = int(0)
-                for md in nama:
-                    akh = akh + int(6)
-
-                    cb += """{"S":""" + json.dumps(str(strt)) + ""","E":""" + json.dumps(
-                        str(akh)) + ""","M":""" + json.dumps(md) + "},"""
-
-                    strt = strt + int(7)
-                    akh = akh + 1
-                    cb2 += "@nrik \n"
-
-                cb = (cb[:int(len(cb) - 1)])
-                msg.contentType = 0
-                msg.text = cb2
-                msg.contentMetadata = {'MENTION': '{"MENTIONEES":[' + cb + ']}', 'EMTVER': '4'}
-
-                try:
+                k = len(group.members) // 100
+                for j in xrange(k + 1):
+                    msg = Message(to=msg.to)
+                    txt = u''
+                    s = 0
+                    d = []
+                    for i in group.members[j * 100: (j + 1) * 100]:
+                        d.append({"S": str(s), "E": str(s + 8), "M": i.mid})
+                        s += 9
+                        txt += u'@Krampus\n'
+                    msg.text = txt
+                    msg.contentMetadata = {u'MENTION': json.dumps({"MENTIONEES": d})}
                     cl.sendMessage(msg)
-                except Exception as error:
-                    print error
-
-            elif msg.text == "ใครแอบ":
-                cl.sendText(msg.to, "ตั้งเวลาตรวจสอบคนอ่าน")
-                try:
-                    del wait2['readPoint'][msg.to]
-                    del wait2['readMember'][msg.to]
-                except:
-                    pass
-                now2 = datetime.now()
-                wait2['readPoint'][msg.to] = msg.id
-                wait2['readMember'][msg.to] = ""
-                wait2['setTime'][msg.to] = datetime.now().strftime('%Y-%m-%d %H:%M')
-                wait2['ROM'][msg.to] = {}
-                print wait2
-            elif msg.text == "ออกมา":
-                if msg.to in wait2['readPoint']:
-                    if wait2["ROM"][msg.to].items() == []:
-                        chiya = ""
-                    else:
-                        chiya = ""
-                        for rom in wait2["ROM"][msg.to].items():
-                            print rom
-                            chiya += rom[1] + "\n"
-
-                    cl.sendText(msg.to,"รายชื่อคนอ่าน %s\n􀜁􀅔Har Har􏿿\n\nรายชื่อคนอ่าน\n%s􀜁􀅔Har Har􏿿\n\nฺํตรวจสอบ By:BFFFf\n[%s]" % (wait2['readMember'][msg.to], chiya, setTime[msg.to]))
-                else:
-                    cl.sendText(msg.to, "ใช้คำสั่ง [ใครแอบ]ก่อนคับ")
 
 
-
-        if op.type == 55:
-            try:
-                if op.param1 in wait2['readPoint']:
-                    Name = cl.getContact(op.param2).displayName
-                    if Name in wait2['readMember'][op.param1]:
-                        pass
-                    else:
-                        wait2['readMember'][op.param1] += "\n・" + Name
-                        wait2['ROM'][op.param1][op.param2] = "・" + Name
-                else:
-                    cl.sendText
-            except:
-                pass
 
         if op.type == 59:
             print op
@@ -3068,40 +2791,27 @@ def bot3(op):
 
     except Exception as error:
         print error
-
-
-def autoSta():
-    count = 1
-    while True:
-        try:
-           for posts in cl.activity(1)["result"]["posts"]:
-             if posts["postInfo"]["liked"] is False:
-                if wait["likeOn"] == True:
-                   cl.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   ki.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   kk.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   kc.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   ks.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   kt.like(posts["userInfo"]["writerMid"], posts["postInfo"]["postId"], 1001)
-                   if wait["commentOn"] == True:
-                      if posts["userInfo"]["writerMid"] in wait["commentBlack"]:
-                         pass
-                      else:
-                          cl.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-                          ki.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-                          kk.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-                          kc.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-                          ks.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-                          kt.comment(posts["userInfo"]["writerMid"],posts["postInfo"]["postId"],wait["comment"])
-        except:
-            count += 1
-            if(count == 50):
-                sys.exit(0)
-            else:
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+def likePost():
+    for zx in range(0,20):
+        hasil = cl.activity(limit=20)
+        if hasil['result']['posts'][zx]['postInfo']['liked'] == False:
+            try:
+                cl.like(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],likeType=1001)
+                cl.comment(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],"Auto like by:Bf บั้ม..")
+                print "Like"
+            except:
                 pass
-thread1 = threading.Thread(target=autoSta)
-thread1.daemon = True
-thread1.start()
+            else:
+                print "Not Admin or staff"
+
+
 def a2():
     now2 = datetime.now()
     nowT = datetime.strftime(now2,"%M")
@@ -3127,14 +2837,15 @@ def nameUpdate():
 thread2 = threading.Thread(target=nameUpdate)
 thread2.daemon = True
 thread2.start()
-    
+
+
 while True:
     try:
-        Ops = cl.fetchOps(cl.Poll.rev,  5)
+        Ops = cl.fetchOps(cl.Poll.rev, 5)
     except EOFError:
         raise Exception("It might be wrong revision\n" + str(cl.Poll.rev))
 
     for Op in Ops:
         if (Op.type != OpType.END_OF_OPERATION):
             cl.Poll.rev = max(cl.Poll.rev, Op.revision)
-            bot2(Op),bot3(Op)
+            bot(Op),bot2(Op)

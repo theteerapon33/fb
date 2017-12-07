@@ -304,15 +304,16 @@ class LINE:
       return 4
     else:
       return 5
-
   def loginResult(self, callback=None):
     if callback is None:
       callback = def_callback
 
       prof = self.getProfile()
 
-      print("R.A-BOT")
-      print("mid -> " + prof.mid)
-      print("name -> " + prof.displayName)
-      print("authToken -> " + self.authToken)
-      print("cert -> " + self.cert if self.cert is not None else "")
+
+    print("MikanBOT")
+    print("mid -> " + prof.mid)
+    print("name -> " + prof.displayName)
+    print("authToken -> " + self.authToken)
+    print("cert -> " + self.cert if self.cert is not None else "")
+
